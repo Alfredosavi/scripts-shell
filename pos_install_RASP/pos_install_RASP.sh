@@ -6,14 +6,14 @@ set -e # Exit immediately if a command exits with a non-zero status.
 # PPA_LIBRATBAG="ppa:libratbag-piper/piper-libratbag-git"
 # URL_GOOGLE_CHROME="https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb"
 
-GIT_USER_NAME="Alfredo Savi"
-GIT_USER_EMAIL="alfredosavi@hotmail.com"
+GIT_USER_NAME="Alfredo Savi" # Nome de usuário do Git
+GIT_USER_EMAIL="alfredosavi@hotmail.com" # Email do usuário do Git
 
 DIRETORIO_DOWNLOADS="$HOME/Downloads/programas"
-PORTAINER_IMG_LABEL=":linux-arm"
-PATH_OH_MY_ZSH="$HOME/.oh-my-zsh"
+PORTAINER_IMG_LABEL=":linux-arm" # Label para o container do portainer 
+PATH_OH_MY_ZSH="$HOME/.oh-my-zsh" # Diretorio padrão do Oh My Zsh
 
-PACOTES_PARA_INSTALAR=(
+INSTALL_PACKAGES=( # Lista de pacotes que são pre-requisitos para os programas
   raspberrypi-kernel # Docker
   raspberrypi-kernel-headers # Docker
   libffi-dev # Docker-Compose
@@ -23,7 +23,7 @@ PACOTES_PARA_INSTALAR=(
   python3-pip # Docker-Compose
 )
 
-PROGRAMAS_PARA_INSTALAR=(
+INSTALL_SOFTS=( # Lista de programas que serão instalados
   zsh
   ffmpeg
   code # Visual Studio Code
@@ -31,7 +31,7 @@ PROGRAMAS_PARA_INSTALAR=(
 )
 
 
-function installOhMyZsh() {
+function installOhMyZsh() { # Função para instalar o Oh My Zsh
   echo -e "\033[01;32m [INFO]\033[0m Instalando Oh-My-Zsh ..."
   echo y | sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 }
@@ -60,7 +60,7 @@ fi
 
 
 # Instalar pacotes de dependencias via APT
-for nome_do_pacote in ${PACOTES_PARA_INSTALAR[@]}; do
+for nome_do_pacote in ${INSTALL_PACKAGES[@]}; do
   if ! dpkg -l | grep -q $nome_do_pacote; then # Só instala se já não estiver instalado
     sudo apt install "$nome_do_pacote" -y
   else
@@ -70,7 +70,7 @@ done
 
 
 # Instalar programas via APT
-for nome_do_programa in ${PROGRAMAS_PARA_INSTALAR[@]}; do
+for nome_do_programa in ${INSTALL_SOFTS[@]}; do
   if ! dpkg -l | grep -q $nome_do_programa; then # Só instala se já não estiver instalado
     sudo apt install "$nome_do_programa" -y
   else
@@ -96,7 +96,7 @@ else
   sudo pip3 install docker-compose
   echo -e "\033[01;32m [INFO]\033[0m Docker Compose instalado com sucesso!"
 fi
-sudo systemctl enable docker
+sudo systemctl enable docker # Start Docker on boot
 
 ## Instalando Portainer
 if [ "$(sudo docker ps -l | grep portainer)" ]; then
@@ -141,7 +141,7 @@ else
 fi
 # su -s /usr/bin/zsh -c 'command' $USER
 
-# ----------------------RETIRANDO NO PASSWORD ROOT------------------------ #
+# ----------------------RETIRANDO PASSWORD ROOT------------------------ #
 sudo rm -f /etc/sudoers.d/010-pi-nopasswd
 sudo adduser pi sudo
 
@@ -156,7 +156,7 @@ sudo apt update && sudo apt dist-upgrade -y
 sudo apt autoclean
 sudo apt autoremove -y
 
-rm -rf $DIRETORIO_DOWNLOADS
+rm -rf $DIRETORIO_DOWNLOADS # Limpando arquivos baixados que ja não são mais necessários
 
 read -p "Deseja alterar o shell padrão para zsh? [Y/n] " -e -n 1 yn
 case $yn in
