@@ -2,7 +2,7 @@
 
 
 ## :page_facing_up:	Scripts
-  1. [Pós-install raspberry pi](scripts-shell/pos_install_RASP/README.md): Script para instalar e configurar uma raspberry recentemente formatada;
+  1. [Pós-install raspberry pi](./pos_install_RASP/README.md): Script para instalar e configurar uma raspberry recentemente formatada;
   
 `OBS`: Para mais informações, acesse o arquivo `readme` de cada script.
 
