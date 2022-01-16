@@ -142,8 +142,8 @@ fi
 # su -s /usr/bin/zsh -c 'command' $USER
 
 # ----------------------RETIRANDO PASSWORD ROOT------------------------ #
-sudo rm -f /etc/sudoers.d/010-pi-nopasswd
-sudo adduser pi sudo
+sudo bash -c "echo -e $USER ALL=\(ALL\) PASSWD: ALL > /etc/sudoers.d/010-pi-nopasswd"
+sudo adduser $USER sudo
 
 
 # ----------------------CONFIGURAÇÕES GIT------------------------ #
