@@ -19,6 +19,7 @@ Script de instalação de programas e configurações para raspberry pi utilizan
 - Pacotes de instalação
   - zsh;
   - ffmpeg;
+  - sox;
   - visual studio code;
   - gparted;
   - docker;

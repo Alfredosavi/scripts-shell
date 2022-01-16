@@ -21,6 +21,7 @@ INSTALL_PACKAGES=( # Lista de pacotes que são pre-requisitos para os programas
   python3-dev # Docker-Compose
   python3 # Docker-Compose
   python3-pip # Docker-Compose
+  libsox-fmt-all # sox libs
 )
 
 INSTALL_SOFTS=( # Lista de programas que serão instalados
@@ -28,6 +29,7 @@ INSTALL_SOFTS=( # Lista de programas que serão instalados
   ffmpeg
   code # Visual Studio Code
   gparted
+  sox # Player de áudio terminal
 )
 
 
@@ -141,7 +143,7 @@ else
 fi
 # su -s /usr/bin/zsh -c 'command' $USER
 
-# ----------------------RETIRANDO PASSWORD ROOT------------------------ #
+# ----------------------REQUEST PASSWORD ROOT------------------------ #
 sudo bash -c "echo -e $USER ALL=\(ALL\) PASSWD: ALL > /etc/sudoers.d/010-pi-nopasswd"
 sudo adduser $USER sudo
 
